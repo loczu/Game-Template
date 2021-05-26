@@ -1,5 +1,5 @@
 # Game Title
-## Author:
+## Author: Patryk Statkiewicz
 
 ### Short description
 
