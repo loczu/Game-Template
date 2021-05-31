@@ -1,12 +1,12 @@
-# Game Title
+# Game Title: Pheonix Reborn
 ## Author: Patryk Statkiewicz
-
-### Short description
-
-
+### Short description:
+This game is reuploaded 80's arcade game Pheonix, classic retro 80s Shoot'em up! 
+Destroy the Warbirds, Phoenix, and finally the Mothership in this classic arcade game!
+I choose this game, because it used to be my dad's favourite game back in the day.
+I hope u will enjoy!!!
 ### Technologies
 **name** - description
-
 ### How to run this app?
 1. Clone the template project, replacing my-project with the name of the project you are creating: 
 `git clone  https://github.com/github-anki/Game-Template.git my-project`
