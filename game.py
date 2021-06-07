@@ -73,6 +73,23 @@ class Menu3(arcade.View):
 
         self.window.show_view(Level3())
 
+class Loss(arcade.View):
+
+    def on_show(self):
+
+        arcade.set_background_color(arcade.color.BLACK)
+
+    def on_draw(self):
+
+        arcade.start_render()
+        arcade.draw_text("YOU LOST", SCREEN_WIDTH/2, SCREEN_HEIGHT - 175, arcade.color.GREEN, font_size = 50, anchor_x = "center")
+        arcade.draw_text("YOUR SCORE: "+str(score), SCREEN_WIDTH/2, SCREEN_HEIGHT - 250, arcade.color.GREEN, font_size = 50, anchor_x = "center")
+        arcade.draw_text("Press to go to menu", SCREEN_WIDTH/2, 75, arcade.color.GREEN, font_size = 20, anchor_x = "center")
+
+    def on_mouse_press(self, _x, _y, _button, _modifiers):
+
+        self.window.show_view(Menu())
+
 class GameOver(arcade.View):
 
     def on_show(self):
@@ -186,6 +203,8 @@ class Level1(arcade.View):
 
     def on_update(self, delta_time):
 
+        global lives, score
+
         self.ship_list.update()
         self.bullet_list.update()
         self.bird_list.update()
@@ -222,7 +241,6 @@ class Level1(arcade.View):
                 self.score += 10
                 self.bird_deaths += 1
                 if self.bird_deaths == 26:
-                    global lives, score
                     lives = self.lives
                     score = self.score
                     self.window.show_view(Menu2())
@@ -242,7 +260,8 @@ class Level1(arcade.View):
                 self.lives -= 1
                 if self.lives == 0:
                     ship.remove_from_sprite_lists()
-                    self.window.show_view(Menu1())
+                    score = self.score
+                    self.window.show_view(Loss())
 
             if bird_bullet.bottom > SCREEN_HEIGHT:
                 bird_bullet.remove_from_sprite_lists()
@@ -368,6 +387,8 @@ class Level2(arcade.View):
 
     def on_update(self, delta_time):
 
+        global lives, score
+
         self.ship_list.update()
         self.bullet_list.update()
         self.bird_list.update()
@@ -412,7 +433,6 @@ class Level2(arcade.View):
                 self.score += 20
                 self.bird_deaths += 1
                 if self.bird_deaths == 14:
-                    global lives, score
                     lives = self.lives
                     score = self.score
                     self.window.show_view(Menu3())
@@ -432,7 +452,8 @@ class Level2(arcade.View):
                 self.lives -= 1
                 if self.lives == 0:
                     ship.remove_from_sprite_lists()
-                    self.window.show_view(Menu1())
+                    score = self.score
+                    self.window.show_view(Loss())
 
             if bird_bullet.bottom > SCREEN_HEIGHT:
                 bird_bullet.remove_from_sprite_lists()
@@ -476,10 +497,10 @@ class Level3(arcade.View):
         self.bullet_list = arcade.SpriteList()
         self.wall_list = arcade.SpriteList()
 
-        self.score = 0
+        self.score = score
         self.total_time = 0.0
         self.counter = 0
-        self.lives = 3
+        self.lives = lives
         self.bird_deaths = 0
 
         self.ship_sprite = arcade.Sprite("images/ship.png")
@@ -650,6 +671,8 @@ class Level3(arcade.View):
 
     def on_update(self, delta_time):
 
+        global score, lives
+
         self.ship_list.update()
         self.boss_list.update()
         self.bullet_list.update()
@@ -663,6 +686,12 @@ class Level3(arcade.View):
         for self.brick_sprite in self.brick_list:
 
             self.brick_sprite.change_y = - 0.1 * BIRD_SPEED
+            hit_list = arcade.check_for_collision_with_list(self.brick_sprite, self.ship_list)
+
+            for ship in hit_list:
+                ship.remove_from_sprite_lists()
+                score = self.score
+                self.window.show_view(Loss())
         
         for self.boss_sprite in self.boss_list:
 
@@ -710,6 +739,8 @@ class Level3(arcade.View):
             for boss in hit_list3:
                 boss.remove_from_sprite_lists()
                 self.score += 100
+                self.score += self.lives * 10
+                score = self.score
                 self.window.show_view(GameOver())
 
             if bullet.bottom > SCREEN_HEIGHT:
@@ -727,7 +758,8 @@ class Level3(arcade.View):
                 self.lives -= 1
                 if self.lives == 0:
                     ship.remove_from_sprite_lists()
-                    self.window.show_view(Menu1())
+                    score = self.score
+                    self.window.show_view(Loss())
 
             if bird_bullet.bottom > SCREEN_HEIGHT:
                 bird_bullet.remove_from_sprite_lists()
