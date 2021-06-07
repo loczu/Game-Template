@@ -4,7 +4,7 @@ import arcade
 SCREEN_WIDTH = 800
 SCREEN_HEIGHT = 1000
 MOVEMENT_SPEED = 5
-BULLET_SPEED = 5
+BULLET_SPEED = 10
 SCREEN_TITLE = "Pheonix Reborn"
 
 
@@ -46,7 +46,7 @@ class MyGame(arcade.Window):
 
         self.score = 0
 
-        self.player_sprite = arcade.Sprite("images/spaceship.png")
+        self.player_sprite = arcade.Sprite("images/ship.png")
         self.player_sprite.center_x = 400
         self.player_sprite.center_y = 50
         self.player_list.append(self.player_sprite)
