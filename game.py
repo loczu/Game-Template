@@ -1,4 +1,4 @@
-import random, arcade, os
+import random, arcade
 
 SCREEN_WIDTH = 800
 SCREEN_HEIGHT = 1000
@@ -200,6 +200,7 @@ class Level1(arcade.View):
         self.bird_bullet_list = arcade.SpriteList()
         self.bullet_list = arcade.SpriteList()
         self.wall_list = arcade.SpriteList()
+        self.background = arcade.load_texture("images/background.png")
 
         self.score = 0
         self.total_time = 0.0
@@ -266,12 +267,13 @@ class Level1(arcade.View):
     
     def on_show(self):
 
-        arcade.set_background_color(arcade.color.BLACK)
         self.window.set_mouse_visible(False)
 
     def on_draw(self):
 
         arcade.start_render()
+
+        arcade.draw_lrwh_rectangle_textured(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT, self.background)
 
         self.ship_list.draw()
         self.bird_list.draw()
@@ -385,6 +387,7 @@ class Level2(arcade.View):
         self.bird_bullet_list = arcade.SpriteList()
         self.bullet_list = arcade.SpriteList()
         self.wall_list = arcade.SpriteList()
+        self.background = arcade.load_texture("images/background.png")
 
         self.score = score
         self.total_time = 0.0
@@ -452,12 +455,13 @@ class Level2(arcade.View):
     
     def on_show(self):
 
-        arcade.set_background_color(arcade.color.BLACK)
         self.window.set_mouse_visible(False)
 
     def on_draw(self):
 
         arcade.start_render()
+
+        arcade.draw_lrwh_rectangle_textured(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT, self.background)
 
         self.ship_list.draw()
         self.bird_list.draw()
@@ -581,6 +585,7 @@ class Level3(arcade.View):
         self.brick_list = arcade.SpriteList()
         self.bullet_list = arcade.SpriteList()
         self.wall_list = arcade.SpriteList()
+        self.background = arcade.load_texture("images/background.png")
 
         self.score = score
         self.total_time = 0.0
@@ -754,12 +759,13 @@ class Level3(arcade.View):
     
     def on_show(self):
 
-        arcade.set_background_color(arcade.color.BLACK)
         self.window.set_mouse_visible(False)
 
     def on_draw(self):
 
         arcade.start_render()
+
+        arcade.draw_lrwh_rectangle_textured(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT, self.background)
 
         self.ship_list.draw()
         self.boss_list.draw()
