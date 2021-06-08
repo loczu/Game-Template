@@ -4,6 +4,7 @@ SCREEN_WIDTH = 800
 SCREEN_HEIGHT = 1000
 MOVEMENT_SPEED = 3
 BIRD_SPEED = 1
+PLATFORM_SPEED = 0.2
 BULLET_SPEED = 10
 SCREEN_TITLE = "Pheonix Reborn"
 
@@ -16,9 +17,57 @@ class Menu(arcade.View):
     def on_draw(self):
 
         arcade.start_render()
-        arcade.draw_text("MENU", SCREEN_WIDTH/2, SCREEN_HEIGHT - 70, 
+
+        high_scores = open("scoreboard.txt", "r").readlines()
+
+        arcade.draw_text("MENU", SCREEN_WIDTH / 2, SCREEN_HEIGHT - 70, 
             arcade.color.GREEN, font_size = 50, anchor_x = "center", font_name = "OCRAEXT")
-        arcade.draw_text("press to start", SCREEN_WIDTH/2, 75, 
+        arcade.draw_text("RULES", SCREEN_WIDTH / 2, SCREEN_HEIGHT - 150, 
+            arcade.color.GREEN, font_size = 50, anchor_x = "center", font_name = "OCRAEXT")
+        arcade.draw_text("1. Shoot enemy birds", SCREEN_WIDTH / 2, SCREEN_HEIGHT - 180, 
+            arcade.color.GREEN, font_size = 20, anchor_x = "center", font_name = "OCRAEXT")
+        arcade.draw_text("2. Don't get shooted", SCREEN_WIDTH / 2, SCREEN_HEIGHT - 210, 
+            arcade.color.GREEN, font_size = 20, anchor_x = "center", font_name = "OCRAEXT")
+        arcade.draw_text("3. When you get shooted, you will lose one live", SCREEN_WIDTH / 2, SCREEN_HEIGHT - 240, 
+            arcade.color.GREEN, font_size = 20, anchor_x = "center", font_name = "OCRAEXT")
+        arcade.draw_text("4. On start you have 3 lives", SCREEN_WIDTH / 2, SCREEN_HEIGHT - 270, 
+            arcade.color.GREEN, font_size = 20, anchor_x = "center", font_name = "OCRAEXT")
+        arcade.draw_text("5. Defeat boss to win game", SCREEN_WIDTH / 2, SCREEN_HEIGHT - 300, 
+            arcade.color.GREEN, font_size = 20, anchor_x = "center", font_name = "OCRAEXT")
+        arcade.draw_text("CONTROL", SCREEN_WIDTH / 2, SCREEN_HEIGHT - 400, 
+            arcade.color.GREEN, font_size = 50, anchor_x = "center", font_name = "OCRAEXT")
+        arcade.draw_rectangle_filled(30, 550, 50, 50, arcade.color.WHITE)
+        arcade.draw_line(30, 540, 30, 560, arcade.color.BLACK, 3)
+        arcade.draw_triangle_filled(25, 555, 35, 555, 30, 565, arcade.color.BLACK)
+        arcade.draw_rectangle_filled(90, 550, 50, 50, arcade.color.WHITE)
+        arcade.draw_line(90, 540, 90, 560, arcade.color.BLACK, 3)
+        arcade.draw_triangle_filled(85, 545, 95, 545, 90, 535, arcade.color.BLACK)
+        arcade.draw_rectangle_filled(150, 550, 50, 50, arcade.color.WHITE)
+        arcade.draw_line(140, 550, 160, 550, arcade.color.BLACK, 3)
+        arcade.draw_triangle_filled(145, 555, 145, 545, 135, 550, arcade.color.BLACK)
+        arcade.draw_rectangle_filled(210, 550, 50, 50, arcade.color.WHITE)
+        arcade.draw_line(200, 550, 220, 550, arcade.color.BLACK, 3)
+        arcade.draw_triangle_filled(215, 555, 215, 545, 225, 550, arcade.color.BLACK)
+        arcade.draw_text("- ship moving", 250, 540, 
+            arcade.color.GREEN, font_size = 20, font_name = "OCRAEXT")
+        arcade.draw_rectangle_filled(575, 550, 200, 50, arcade.color.WHITE)
+        arcade.draw_text("space", 575, 540, 
+            arcade.color.BLACK, font_size = 20, anchor_x = "center")
+        arcade.draw_text("- shot", 685, 540, 
+            arcade.color.GREEN, font_size = 20, font_name = "OCRAEXT")
+        arcade.draw_text("SCOREBOARD", SCREEN_WIDTH / 2, 400, 
+            arcade.color.GREEN, font_size = 50, anchor_x = "center",font_name = "OCRAEXT")   
+        arcade.draw_text("1. " + high_scores[0], SCREEN_WIDTH / 2, 300, 
+            arcade.color.GREEN, font_size = 40, anchor_x = "center", font_name = "OCRAEXT")
+        arcade.draw_text("2. " + high_scores[1], SCREEN_WIDTH / 2, 250, 
+            arcade.color.GREEN, font_size = 40, anchor_x = "center", font_name = "OCRAEXT")
+        arcade.draw_text("3. " + high_scores[2], SCREEN_WIDTH / 2, 200, 
+            arcade.color.GREEN, font_size = 40, anchor_x = "center", font_name = "OCRAEXT")
+        arcade.draw_text("4. " + high_scores[3], SCREEN_WIDTH / 2, 150, 
+            arcade.color.GREEN, font_size = 40, anchor_x = "center", font_name = "OCRAEXT")
+        arcade.draw_text("5. " + high_scores[4], SCREEN_WIDTH / 2, 100, 
+            arcade.color.GREEN, font_size = 40, anchor_x = "center", font_name = "OCRAEXT")
+        arcade.draw_text("press to start", SCREEN_WIDTH / 2, 75, 
             arcade.color.GREEN, font_size = 20, anchor_x = "center", font_name = "OCRAEXT")
         
     def on_mouse_press(self, _x, _y, _button, _modifiers):
@@ -34,9 +83,9 @@ class Menu1(arcade.View):
     def on_draw(self):
 
         arcade.start_render()
-        arcade.draw_text("LEVEL 1", SCREEN_WIDTH/2, SCREEN_HEIGHT - 70, 
+        arcade.draw_text("LEVEL 1", SCREEN_WIDTH / 2, SCREEN_HEIGHT - 70, 
             arcade.color.GREEN, font_size = 50, anchor_x = "center", font_name = "OCRAEXT")
-        arcade.draw_text("press to start", SCREEN_WIDTH/2, 75, 
+        arcade.draw_text("press to start", SCREEN_WIDTH / 2, 75, 
             arcade.color.GREEN, font_size = 20, anchor_x = "center", font_name = "OCRAEXT")
         
     def on_mouse_press(self, _x, _y, _button, _modifiers):
@@ -52,11 +101,11 @@ class Menu2(arcade.View):
     def on_draw(self):
 
         arcade.start_render()
-        arcade.draw_text("LEVEL 2", SCREEN_WIDTH/2, SCREEN_HEIGHT - 70, 
+        arcade.draw_text("LEVEL 2", SCREEN_WIDTH / 2, SCREEN_HEIGHT - 70, 
             arcade.color.GREEN, font_size = 50, anchor_x = "center", font_name = "OCRAEXT")
-        arcade.draw_text("YOUR SCORE: "+str(score), SCREEN_WIDTH/2, SCREEN_HEIGHT - 250, 
+        arcade.draw_text("YOUR SCORE: "+str(score), SCREEN_WIDTH / 2, SCREEN_HEIGHT - 250, 
             arcade.color.GREEN, font_size = 50, anchor_x = "center", font_name = "OCRAEXT")
-        arcade.draw_text("press to start", SCREEN_WIDTH/2, 75, 
+        arcade.draw_text("press to start", SCREEN_WIDTH / 2, 75, 
             arcade.color.GREEN, font_size = 20, anchor_x = "center", font_name = "OCRAEXT")
         
     def on_mouse_press(self, _x, _y, _button, _modifiers):
@@ -72,11 +121,11 @@ class Menu3(arcade.View):
     def on_draw(self):
 
         arcade.start_render()
-        arcade.draw_text("LEVEL 3", SCREEN_WIDTH/2, SCREEN_HEIGHT - 70, 
+        arcade.draw_text("LEVEL 3", SCREEN_WIDTH / 2, SCREEN_HEIGHT - 70, 
             arcade.color.GREEN, font_size = 50, anchor_x = "center", font_name = "OCRAEXT")
-        arcade.draw_text("YOUR SCORE: "+str(score), SCREEN_WIDTH/2, SCREEN_HEIGHT - 250, 
+        arcade.draw_text("YOUR SCORE: "+str(score), SCREEN_WIDTH / 2, SCREEN_HEIGHT - 250, 
             arcade.color.GREEN, font_size = 50, anchor_x = "center", font_name = "OCRAEXT")
-        arcade.draw_text("press to start", SCREEN_WIDTH/2, 75, 
+        arcade.draw_text("press to start", SCREEN_WIDTH / 2, 75, 
             arcade.color.GREEN, font_size = 20, anchor_x = "center", font_name = "OCRAEXT")
         
     def on_mouse_press(self, _x, _y, _button, _modifiers):
@@ -92,11 +141,11 @@ class Loss(arcade.View):
     def on_draw(self):
 
         arcade.start_render()
-        arcade.draw_text("YOU LOST", SCREEN_WIDTH/2, SCREEN_HEIGHT - 175, 
+        arcade.draw_text("YOU LOST", SCREEN_WIDTH / 2, SCREEN_HEIGHT - 175, 
             arcade.color.GREEN, font_size = 50, anchor_x = "center", font_name = "OCRAEXT")
-        arcade.draw_text("YOUR SCORE: "+str(score), SCREEN_WIDTH/2, SCREEN_HEIGHT - 250,
+        arcade.draw_text("YOUR SCORE: "+str(score), SCREEN_WIDTH / 2, SCREEN_HEIGHT - 250,
             arcade.color.GREEN, font_size = 50, anchor_x = "center", font_name = "OCRAEXT")
-        arcade.draw_text("press to go to menu", SCREEN_WIDTH/2, 75, 
+        arcade.draw_text("press to go to menu", SCREEN_WIDTH / 2, 75, 
             arcade.color.GREEN, font_size = 20, anchor_x = "center", font_name = "OCRAEXT")
 
     def on_mouse_press(self, _x, _y, _button, _modifiers):
@@ -112,12 +161,27 @@ class GameOver(arcade.View):
     def on_draw(self):
 
         arcade.start_render()
-        arcade.draw_text("CONGRATULATIONS", SCREEN_WIDTH/2, SCREEN_HEIGHT - 100, 
+
+        high_scores = open("scoreboard.txt", "r").readlines()
+
+        arcade.draw_text("CONGRATULATIONS", SCREEN_WIDTH / 2, SCREEN_HEIGHT - 100, 
             arcade.color.GREEN, font_size = 70, anchor_x = "center", font_name = "OCRAEXT")
-        arcade.draw_text("YOU COMPLETE GAME", SCREEN_WIDTH/2, SCREEN_HEIGHT - 175, 
+        arcade.draw_text("YOU COMPLETE GAME", SCREEN_WIDTH / 2, SCREEN_HEIGHT - 175, 
             arcade.color.GREEN, font_size = 50, anchor_x = "center", font_name = "OCRAEXT")
-        arcade.draw_text("YOUR SCORE: "+str(score), SCREEN_WIDTH/2, SCREEN_HEIGHT - 250, 
+        arcade.draw_text("YOUR SCORE: "+str(score), SCREEN_WIDTH / 2, SCREEN_HEIGHT - 250, 
             arcade.color.GREEN, font_size = 50, anchor_x = "center", font_name = "OCRAEXT")
+        arcade.draw_text("SCOREBOARD", SCREEN_WIDTH / 2, 400, 
+            arcade.color.GREEN, font_size = 50, anchor_x = "center",font_name = "OCRAEXT")
+        arcade.draw_text("1. " + high_scores[0], SCREEN_WIDTH / 2, 300, 
+            arcade.color.GREEN, font_size = 40, anchor_x = "center",font_name = "OCRAEXT")
+        arcade.draw_text("2. " + high_scores[1], SCREEN_WIDTH / 2, 250, 
+            arcade.color.GREEN, font_size = 40, anchor_x = "center",font_name = "OCRAEXT")
+        arcade.draw_text("3. " + high_scores[2], SCREEN_WIDTH / 2, 200, 
+            arcade.color.GREEN, font_size = 40, anchor_x = "center",font_name = "OCRAEXT")
+        arcade.draw_text("4. " + high_scores[3], SCREEN_WIDTH / 2, 150, 
+            arcade.color.GREEN, font_size = 40, anchor_x = "center",font_name = "OCRAEXT")
+        arcade.draw_text("5. " + high_scores[4], SCREEN_WIDTH / 2, 100, 
+            arcade.color.GREEN, font_size = 40, anchor_x = "center",font_name = "OCRAEXT")
         arcade.draw_text("press to go to menu", SCREEN_WIDTH/2, 75, 
             arcade.color.GREEN, font_size = 20, anchor_x = "center", font_name = "OCRAEXT")
         
@@ -648,6 +712,12 @@ class Level3(arcade.View):
             self.brick_sprite.center_x = x
             self.brick_sprite.center_y = 420
             self.brick_list.append(self.brick_sprite)
+        
+        for x in range(325, SCREEN_WIDTH - 325, 25):
+            self.brick_sprite = arcade.Sprite("images/brick.png")
+            self.brick_sprite.center_x = x
+            self.brick_sprite.center_y = 400
+            self.brick_list.append(self.brick_sprite)
 
         for x in range(-100, SCREEN_WIDTH, 200):
             wall = arcade.Sprite("images/wall.png")
@@ -720,7 +790,7 @@ class Level3(arcade.View):
 
         for self.brick_sprite in self.brick_list:
 
-            self.brick_sprite.change_y = - 0.1 * BIRD_SPEED
+            self.brick_sprite.change_y = - PLATFORM_SPEED
             hit_list = arcade.check_for_collision_with_list(self.brick_sprite, self.ship_list)
 
             for ship in hit_list:
@@ -730,7 +800,13 @@ class Level3(arcade.View):
         
         for self.boss_sprite in self.boss_list:
 
-            self.boss_sprite.change_y = - 0.1 * BIRD_SPEED
+            self.boss_sprite.change_y = - PLATFORM_SPEED
+            hit_list = arcade.check_for_collision_with_list(self.boss_sprite, self.ship_list)
+
+            for ship in hit_list:
+                ship.remove_from_sprite_lists()
+                score = self.score
+                self.window.show_view(Loss())
 
         for self.bird_sprite in self.bird_list:
 
@@ -776,6 +852,24 @@ class Level3(arcade.View):
                 self.score += 100
                 self.score += self.lives * 10
                 score = self.score
+                high_scores = open("scoreboard.txt", "r")
+                high_scores = high_scores.readlines()
+                new_high_scores = []
+                added_result = False
+
+                for i in range(5):
+                    if int(high_scores[i]) <= score and not added_result:
+                        new_high_scores.append(str(score) + "\n")
+                        added_result = True
+                    else:
+                        if added_result:
+                            new_high_scores.append(high_scores[i - 1])
+                        else:
+                            new_high_scores.append(high_scores[i])
+
+                high_scores = open("scoreboard.txt", "w")
+                high_scores.writelines(new_high_scores)
+                high_scores.close()
                 self.window.show_view(GameOver())
 
             if bullet.bottom > SCREEN_HEIGHT:
