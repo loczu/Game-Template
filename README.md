@@ -6,7 +6,7 @@ Destroy the Warbirds, Phoenix, and finally the Mothership in this classic arcade
 I choose this game, because it used to be my dad's favourite game back in the day.
 I hope u will enjoy!!!
 ### Technologies
-**name** - description
+**Python** - Visual Studio Code
 ### How to run this app?
 1. Clone the template project, replacing my-project with the name of the project you are creating: 
 `git clone  https://github.com/github-anki/Game-Template.git my-project`

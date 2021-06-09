@@ -20,8 +20,8 @@ class Menu(arcade.View):
 
         high_scores = open("scoreboard.txt", "r").readlines()
 
-        arcade.draw_text("MENU", SCREEN_WIDTH / 2, SCREEN_HEIGHT - 70, 
-            arcade.color.GREEN, font_size = 50, anchor_x = "center", font_name = "OCRAEXT")
+        arcade.draw_text("MENU", SCREEN_WIDTH / 2, SCREEN_HEIGHT - 85, 
+            arcade.color.GREEN, font_size = 70, anchor_x = "center", font_name = "OCRAEXT")
         arcade.draw_text("RULES", SCREEN_WIDTH / 2, SCREEN_HEIGHT - 150, 
             arcade.color.GREEN, font_size = 50, anchor_x = "center", font_name = "OCRAEXT")
         arcade.draw_text("1. Shoot enemy birds", SCREEN_WIDTH / 2, SCREEN_HEIGHT - 180, 
