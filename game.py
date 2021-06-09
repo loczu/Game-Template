@@ -208,6 +208,10 @@ class Level1(arcade.View):
         self.lives = 3
         self.bird_deaths = 0
 
+        self.bullet_sound = arcade.Sound("sounds/shot.wav")
+        self.hit_sound = arcade.Sound("sounds/hit.wav")
+        self.explosion_sound = arcade.Sound("sounds/explosion.wav")
+
         self.ship_sprite = arcade.Sprite("images/ship.png")
         self.ship_sprite.center_x = 400
         self.ship_sprite.center_y = 50
@@ -323,6 +327,7 @@ class Level1(arcade.View):
             
             for bird in hit_list:
                 bird.remove_from_sprite_lists()
+                self.hit_sound.play()
                 self.score += 10
                 self.bird_deaths += 1
                 if self.bird_deaths == 26:
@@ -343,6 +348,7 @@ class Level1(arcade.View):
             
             for ship in hit_list:
                 self.lives -= 1
+                self.explosion_sound.play()
                 if self.lives == 0:
                     ship.remove_from_sprite_lists()
                     score = self.score
@@ -355,6 +361,7 @@ class Level1(arcade.View):
 
         if key == arcade.key.SPACE:
             bullet = arcade.Sprite("images/bullet.png")
+            self.bullet_sound.play()
             bullet.change_y = BULLET_SPEED
             bullet.center_x = self.ship_sprite.center_x
             bullet.bottom = self.ship_sprite.top
@@ -395,6 +402,10 @@ class Level2(arcade.View):
         self.counter2 = 0
         self.lives = lives
         self.bird_deaths = 0
+
+        self.bullet_sound = arcade.Sound("sounds/shot.wav")
+        self.hit_sound = arcade.Sound("sounds/hit.wav")
+        self.explosion_sound = arcade.Sound("sounds/explosion.wav")
 
         self.ship_sprite = arcade.Sprite("images/ship.png")
         self.ship_sprite.center_x = 400
@@ -519,6 +530,7 @@ class Level2(arcade.View):
             
             for bird in hit_list:
                 bird.remove_from_sprite_lists()
+                self.hit_sound.play()
                 self.score += 20
                 self.bird_deaths += 1
                 if self.bird_deaths == 14:
@@ -539,6 +551,7 @@ class Level2(arcade.View):
             
             for ship in hit_list:
                 self.lives -= 1
+                self.explosion_sound.play()
                 if self.lives == 0:
                     ship.remove_from_sprite_lists()
                     score = self.score
@@ -551,6 +564,7 @@ class Level2(arcade.View):
 
         if key == arcade.key.SPACE:
             bullet = arcade.Sprite("images/bullet.png")
+            self.bullet_sound.play()
             bullet.change_y = BULLET_SPEED
             bullet.center_x = self.ship_sprite.center_x
             bullet.bottom = self.ship_sprite.top
@@ -592,6 +606,10 @@ class Level3(arcade.View):
         self.counter = 0
         self.lives = lives
         self.bird_deaths = 0
+
+        self.bullet_sound = arcade.Sound("sounds/shot.wav")
+        self.hit_sound = arcade.Sound("sounds/hit.wav")
+        self.explosion_sound = arcade.Sound("sounds/explosion.wav")
 
         self.ship_sprite = arcade.Sprite("images/ship.png")
         self.ship_sprite.center_x = 400
@@ -801,6 +819,7 @@ class Level3(arcade.View):
 
             for ship in hit_list:
                 ship.remove_from_sprite_lists()
+                self.explosion_sound.play()
                 score = self.score
                 self.window.show_view(Loss())
         
@@ -811,6 +830,7 @@ class Level3(arcade.View):
 
             for ship in hit_list:
                 ship.remove_from_sprite_lists()
+                self.explosion_sound.play()
                 score = self.score
                 self.window.show_view(Loss())
 
@@ -847,16 +867,19 @@ class Level3(arcade.View):
 
             for brick in hit_list1:
                 brick.remove_from_sprite_lists()
+                self.hit_sound.play()
                 self.score += 5
             
             for bird in hit_list2:
                 bird.remove_from_sprite_lists()
+                self.hit_sound.play()
                 self.score += 10
             
             for boss in hit_list3:
                 boss.remove_from_sprite_lists()
+                self.explosion_sound.play()
                 self.score += 100
-                self.score += self.lives * 10
+                self.score += self.lives * 50
                 score = self.score
                 high_scores = open("scoreboard.txt", "r")
                 high_scores = high_scores.readlines()
@@ -891,6 +914,7 @@ class Level3(arcade.View):
             
             for ship in hit_list:
                 self.lives -= 1
+                self.explosion_sound.play()
                 if self.lives == 0:
                     ship.remove_from_sprite_lists()
                     score = self.score
@@ -903,6 +927,7 @@ class Level3(arcade.View):
 
         if key == arcade.key.SPACE:
             bullet = arcade.Sprite("images/bullet.png")
+            self.bullet_sound.play()
             bullet.change_y = BULLET_SPEED
             bullet.center_x = self.ship_sprite.center_x
             bullet.bottom = self.ship_sprite.top
